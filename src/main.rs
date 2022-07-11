@@ -1,21 +1,15 @@
 use std::process::Command;
 fn main() {
-    // let output = Command::new("ls")
-    //     .output()
-    //     .expect("failed to execute process");
-    // let stdout = String::from_utf8(output.stdout).unwrap();
-    // println!("{}", stdout);
     let out = compare("develop", "master");
-    println!("{}", out);
+    println!("{:?}", out);
 }
 
-fn compare(origin: &str, to: &str) -> String {
-    let origin = origin;
-    let to = to;
+fn compare<'a>(origin: &str, to: &str) -> Vec<String> {
     let output = Command::new("git")
         .args(["diff", "--name-only", origin, to])
         .output()
         .expect("error");
     let stdout = String::from_utf8(output.stdout).unwrap();
-    return stdout;
+    let v: Vec<String> = stdout.split("\n").map(str::to_string).collect();
+    return v;
 }
