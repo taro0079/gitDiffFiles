@@ -5,7 +5,6 @@ fn main() {
     //     .expect("failed to execute process");
     // let stdout = String::from_utf8(output.stdout).unwrap();
     // println!("{}", stdout);
-    // test
     let out = compare("develop", "master");
     println!("{}", out);
 }
